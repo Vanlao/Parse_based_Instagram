@@ -20,8 +20,10 @@ class LoginViewController: UIViewController {
     }
     //Sign in button.
     @IBAction func onSignIn(_ sender: AnyObject) {
+        let username = ID_field.text ?? ""  //initialize ID text field as empty.
+        let password = Password_field.text ?? ""
         //fill in existing user's ID and pass.
-        PFUser.logInWithUsername( inBackground: ID_field.text!, password: Password_field.text!) { (ID: PFUser?,error: Error?) in
+        PFUser.logInWithUsername( inBackground: username, password: password) { (ID: PFUser?,error: Error?) in
             if ID != nil{
                 print("You are now logged in.")
                 //move from login screen view control to other.
@@ -34,6 +36,13 @@ class LoginViewController: UIViewController {
     @IBAction func onSignUp(_ sender: AnyObject) {
         //fill in new user's data.
         let newUser = PFUser()
+        let alertController = UIAlertController(title: "ERROR", message: "Please fill in Id or password field.", preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            // handle response here.
+            print("OK button tapped")
+        }
+        // add the OK action to the alert controller
+        alertController.addAction(OKAction)
         
         newUser.username = ID_field.text
         newUser.password = Password_field.text
@@ -45,9 +54,19 @@ class LoginViewController: UIViewController {
                 //move from login screen view control to other.
                 self.performSegue(withIdentifier: "LoginSegue", sender: nil)
             }
+            else if (newUser.username!.isEmpty) || (newUser.password!.isEmpty){
+                
+                self.present(alertController, animated: true) {
+                    // optional code for what happens after the alert controller has finished presenting
+                }
+            }
             else{
                 print(error?.localizedDescription)
                 if error?._code  == 202{
+                    self.present(alertController, animated: true) {
+                        alertController.message = "Account already existed for this username :("
+                        // optional code for what happens after the alert controller has finished presenting
+                    }
                     print("Account already existed for this username :(")
                 }
                 

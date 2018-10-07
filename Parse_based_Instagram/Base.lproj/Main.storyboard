@@ -12,7 +12,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="Parse_based_Instagram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginView" id="BYZ-38-t0r" customClass="LoginViewController" customModule="Parse_based_Instagram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -54,27 +54,182 @@
                     <connections>
                         <outlet property="ID_field" destination="fRq-HP-ncw" id="jWx-L6-4cX"/>
                         <outlet property="Password_field" destination="D0z-Tn-AaR" id="tar-FW-yza"/>
-                        <segue destination="cHH-zO-3FI" kind="presentation" identifier="LoginSegue" id="cov-6r-L0Y"/>
+                        <segue destination="FFA-L5-VKM" kind="presentation" identifier="LoginSegue" id="J4e-32-ne3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
         </scene>
-        <!--View Controller-->
+        <!--Home Feed-->
         <scene sceneID="WKv-Ic-Nza">
             <objects>
-                <viewController id="cHH-zO-3FI" sceneMemberID="viewController">
+                <viewController id="cHH-zO-3FI" customClass="HomeFeedViewController" customModule="Parse_based_Instagram" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XbJ-AR-U2J">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FNa-EY-xrl">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedCell" rowHeight="437" id="UKJ-NW-5Wd" customClass="HomeFeedViewCell" customModule="Parse_based_Instagram" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="437"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UKJ-NW-5Wd" id="kbv-NE-SkU">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="436.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="f8g-Nn-W3u" customClass="PFImageView">
+                                                    <rect key="frame" x="0.0" y="-8.5" width="375" height="375"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPL-AA-moJ">
+                                                    <rect key="frame" x="15" y="374.5" width="345" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="IPL-AA-moJ" secondAttribute="bottom" constant="8" id="2PM-wY-0Wo"/>
+                                                <constraint firstItem="IPL-AA-moJ" firstAttribute="leading" secondItem="kbv-NE-SkU" secondAttribute="leadingMargin" id="3dj-yo-fik"/>
+                                                <constraint firstAttribute="trailing" secondItem="f8g-Nn-W3u" secondAttribute="trailing" id="7Fs-k5-ZL9"/>
+                                                <constraint firstItem="f8g-Nn-W3u" firstAttribute="leading" secondItem="kbv-NE-SkU" secondAttribute="leading" id="CA2-9z-Hiu"/>
+                                                <constraint firstItem="IPL-AA-moJ" firstAttribute="trailing" secondItem="kbv-NE-SkU" secondAttribute="trailingMargin" id="Sa3-Yn-xge"/>
+                                                <constraint firstItem="f8g-Nn-W3u" firstAttribute="top" secondItem="kbv-NE-SkU" secondAttribute="top" constant="-8.5" id="pQv-wZ-LQ3"/>
+                                                <constraint firstItem="IPL-AA-moJ" firstAttribute="top" secondItem="f8g-Nn-W3u" secondAttribute="bottom" constant="8" id="v6M-fw-wyV"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="captionLabel" destination="IPL-AA-moJ" id="EIN-U8-Zxe"/>
+                                            <outlet property="feedImage1" destination="f8g-Nn-W3u" id="dQw-ms-V4P"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="FNa-EY-xrl" firstAttribute="top" secondItem="adD-8L-2RK" secondAttribute="top" id="6lk-NR-pxX"/>
+                            <constraint firstItem="FNa-EY-xrl" firstAttribute="trailing" secondItem="adD-8L-2RK" secondAttribute="trailing" id="iJb-P3-ebH"/>
+                            <constraint firstItem="FNa-EY-xrl" firstAttribute="leading" secondItem="adD-8L-2RK" secondAttribute="leading" id="tOY-Ii-nvU"/>
+                            <constraint firstItem="FNa-EY-xrl" firstAttribute="bottom" secondItem="adD-8L-2RK" secondAttribute="bottom" id="uNC-Qb-awe"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="adD-8L-2RK"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Home Feed" id="KA4-xu-1nq">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="0f1-Ik-qOR">
+                            <connections>
+                                <action selector="onLogOut:" destination="cHH-zO-3FI" id="u0I-X6-Id1"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="insta_camera_btn" id="Z7T-5i-XgI">
+                            <connections>
+                                <action selector="OnCompose:" destination="cHH-zO-3FI" id="sgk-gl-p84"/>
+                                <segue destination="yiu-aG-d2w" kind="presentation" identifier="ComposeSegue" id="yDk-62-xqk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableViewer" destination="FNa-EY-xrl" id="mOk-5I-YSb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jjl-mp-TwW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="879" y="133"/>
+            <point key="canvasLocation" x="1816.8" y="132.68365817091455"/>
+        </scene>
+        <!--Compose View Controller-->
+        <scene sceneID="Tnb-Qp-wFB">
+            <objects>
+                <viewController id="7Kr-bf-3xM" customClass="ComposeViewController" customModule="Parse_based_Instagram" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Yec-yS-gCT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="9qO-LS-6PA">
+                                <rect key="frame" x="0.0" y="64" width="375" height="366"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="cFb-de-Aac" appends="YES" id="dxc-vl-r9v"/>
+                                </connections>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GxU-WU-cUW">
+                                <rect key="frame" x="16" y="438" width="319" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="NJ1-ju-QMg"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="wn6-Qf-uyJ">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="r5A-mD-mdn">
+                            <connections>
+                                <action selector="OnCancel:" destination="7Kr-bf-3xM" id="e7B-K5-q6h"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Share" id="Xnm-83-hjl">
+                            <connections>
+                                <action selector="OnShare:" destination="7Kr-bf-3xM" id="FRM-Q0-AF2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="captionField" destination="GxU-WU-cUW" id="NWE-Rk-RIZ"/>
+                        <outlet property="posetImage" destination="9qO-LS-6PA" id="TCO-ko-2H8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bDA-BJ-jLN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="cFb-de-Aac">
+                    <connections>
+                        <action selector="Tapped:" destination="7Kr-bf-3xM" id="39U-37-8GD"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="3575.1999999999998" y="125.4872563718141"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="f0k-B1-UX3">
+            <objects>
+                <navigationController storyboardIdentifier="FeedView" automaticallyAdjustsScrollViewInsets="NO" id="FFA-L5-VKM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Kqp-gt-h74">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="cHH-zO-3FI" kind="relationship" relationship="rootViewController" id="ozq-EO-DHo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jz5-ov-YhY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="877.60000000000002" y="132.68365817091455"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ty5-sW-pB2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yiu-aG-d2w" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1fp-4T-k9f">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="7Kr-bf-3xM" kind="relationship" relationship="rootViewController" id="4Je-pU-fNN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4fP-rb-yAD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2636" y="125.4872563718141"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="image_placeholder" width="375" height="375"/>
+        <image name="insta_camera_btn" width="25" height="25"/>
+    </resources>
 </document>

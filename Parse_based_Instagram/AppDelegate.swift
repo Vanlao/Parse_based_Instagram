@@ -13,7 +13,7 @@ import Parse
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -24,9 +24,58 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 configuration.clientKey = "suyezo27Y"
                 configuration.server = "https://serene-hamlet-70061.herokuapp.com/parse"
             })
-        ) // linking ends.
+        )
+        NotificationCenter.default.addObserver(forName: Notification.Name("didCancel"), object: nil, queue: OperationQueue.main) { (Notification) in
+            print("Cancel notification received")
+            self.Cancel()
+        }
+        NotificationCenter.default.addObserver(forName: Notification.Name("didShared"), object: nil, queue: OperationQueue.main) { (Notification) in
+            print("Share notification received")
+            self.shared()
+        }
+        // check if user is logged in.
+        if PFUser.current() != nil {
+            // view controller currently being set in Storyboard as default will be overridden
+            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "FeedView")
+        }
+        //notification for user logging out
+        NotificationCenter.default.addObserver(forName: Notification.Name("didLogout"), object: nil, queue: OperationQueue.main) { (Notification) in
+            print("Logout notification received")
+            self.logOut()
+        }// linking ends.
+        
+        
+        
         return true
     }
+    func Cancel() {
+        window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "FeedView")
+    }
+    
+    func shared() {
+        window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "FeedView")
+    }
+   
+    
+    func logOut() {
+        // Logout the current user
+        PFUser.logOutInBackground(block: { (error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                print("Successful loggout")
+                // Load and show the login view controller
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginView")//storyboard ID, not class, wasted 2 hours of my life.
+                self.window?.rootViewController = loginViewController
+                
+            }
+        })
+    }
+    
+    
+    //resize image
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
