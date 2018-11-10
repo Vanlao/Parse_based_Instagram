@@ -102,7 +102,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="captionLabel" destination="IPL-AA-moJ" id="EIN-U8-Zxe"/>
-                                            <outlet property="feedImage1" destination="f8g-Nn-W3u" id="dQw-ms-V4P"/>
+                                            <outlet property="feedImage" destination="f8g-Nn-W3u" id="u61-4t-Zez"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

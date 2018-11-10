@@ -22,13 +22,11 @@ class Post: PFObject, PFSubclassing {
     }
     
     class func postUserImage(image: UIImage?, withCaption caption: String?, withCompletion completion: PFBooleanResultBlock?) {
-        // use subclass approach
         let post = Post()
         
-        // Add relevant fields to the object
         if let file = getPFFileFromImage(image: image){
             post.media = file
-        }// PFFile column type
+        }
         post.author = PFUser.current()! // Pointer column type that points to PFUser
         post.caption = caption!
         post.likesCount = 0

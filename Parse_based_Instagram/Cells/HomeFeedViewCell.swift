@@ -11,27 +11,19 @@ import Parse
 import ParseUI
 class HomeFeedViewCell: UITableViewCell {
 
-    @IBOutlet weak var FeedImage: UIImageView!
     
-    @IBOutlet weak var feedImage1: PFImageView!
+    
+
     
     @IBOutlet weak var captionLabel: UILabel!
     
-    var feed: Post!{
-        didSet{
-            print("post set!")
-            self.feedImage1.file = feed["media"] as! PFFile
-            self.feedImage1.loadInBackground()
-            self.captionLabel.text = feed["caption"] as! String
-            print(self.captionLabel.text)
-        }
-        
-    }
+    @IBOutlet weak var feedImage: UIImageView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        feedImage1.layer.cornerRadius = 2 //make feed image corner rounder.
-        feedImage1.clipsToBounds = true
+        feedImage.layer.cornerRadius = 2 //make feed image corner rounder.
+        feedImage.clipsToBounds = true
 
         captionLabel.preferredMaxLayoutWidth = captionLabel.frame.size.width //autolayout.
         // Initialization code

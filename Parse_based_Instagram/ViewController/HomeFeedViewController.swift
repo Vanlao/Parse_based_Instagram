@@ -14,7 +14,7 @@ class HomeFeedViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableViewer: UITableView!
     
 
-    var feeds: [Post]!
+    var feeds: [Post] = []
     var refreshControl = UIRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +45,6 @@ class HomeFeedViewController: UIViewController, UITableViewDelegate, UITableView
         alertController.addAction(cancelAction)
         alertController.addAction(OKAction)
         self.present(alertController, animated: true) {
-            
             // optional code for what happens after the alert controller has finished presenting
         }
         
@@ -60,7 +59,7 @@ class HomeFeedViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         if feeds != nil{
-            return feeds!.count
+            return feeds.count
         }
         else{
             return 0}
@@ -74,35 +73,36 @@ class HomeFeedViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
     func fetch(){
-        let url = URL(string: "https://serene-hamlet-70061.herokuapp.com/parse")!
+        /*let url = URL(string: "https://serene-hamlet-70061.herokuapp.com/parse")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
         let task = session.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 print(error.localizedDescription)
             } else if let data = data {
-                let querry = PFQuery(className: "Post")
-                querry.order(byDescending: "createdAt")
-                querry.limit = 20
-                querry.findObjectsInBackground {
-                    (objects: [PFObject]?, error: Error?) -> Void in
-                    if error == nil {
-                        print("objects found")
-                        
-                        if let objects = objects {
-                            self.feeds = objects as! [Post]
-                            self.tableViewer.reloadData()
-                            self.refreshControl.endRefreshing()
-                            print("refreshed")
-                        }
-
-        
-                    
-                    }
-                }
+                
             }
         }
-        task.resume()
+        task.resume()*/
+        let querry = Post.query()
+        querry?.order(byDescending: "createdAt")
+        querry?.limit = 20
+        querry?.findObjectsInBackground {
+            (objects: [PFObject]?, error: Error?) -> Void in
+            if error == nil {
+                print("objects found")
+                
+                if let objects = objects as? [Post]{
+                    self.feeds = objects as! [Post]
+                    self.tableViewer.reloadData()
+                    self.refreshControl.endRefreshing()
+                    print("refreshed")
+                }
+                
+                
+                
+            }
+        }
     }
     
     

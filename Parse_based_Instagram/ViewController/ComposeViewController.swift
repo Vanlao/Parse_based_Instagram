@@ -13,9 +13,9 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var posetImage: UIImageView!
  
     @IBOutlet weak var captionField: UITextField!
-    //tap on image to choose images from library
-    //make sure to check mark "user interaction" in posetImage property, or tapping won't work.
+    var image = UIImageView()
     let vc = UIImagePickerController()
+    
     @IBAction func Tapped(_ sender: UITapGestureRecognizer) {
         print("tapped")
         vc.delegate = self
@@ -23,17 +23,19 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
         vc.sourceType = UIImagePickerController.SourceType.photoLibrary
         self.present(vc, animated: true, completion: nil)
     }
+    
     @objc func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // Get the image captured by the UIImagePickerController
         //the codes from Codepath are out-of-date and not working, use these.
-        let originalImage = info[.originalImage] as! UIImage
-        // Do something with the images (based on your use case)
+        let originalImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         
-         posetImage.image = resizeImage(image: originalImage, newSize: CGSize(width: 20, height: 30))
+        self.image.image = originalImage
+         //posetImage.image = resizeImage(image: originalImage, newSize: CGSize(width: 20, height: 30))
         // Dismiss UIImagePickerController to go back to your original view controller
         self.dismiss(animated: true, completion: nil)
-        
+        let tempIMG = self.image.image!
+        posetImage.image = resizeImage(image: tempIMG, newSize: CGSize(width: 20, height: 30))
     }
     
     override func viewDidLoad() {
@@ -43,8 +45,6 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func resizeImage(image: UIImage, newSize: CGSize) -> UIImage {
-        // This is the rect that we've calculated out and this is what is actually used below
-        //let rect = UIImageView(x: 0, y: 0, width: newSize.width, height: newSize.height)
         let resizeImage = UIImageView(frame: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
         resizeImage.contentMode = UIView.ContentMode.scaleAspectFill
         resizeImage.image = image
@@ -69,13 +69,16 @@ class ComposeViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func OnShare(_ sender: AnyObject) {
-        
-        Post.postUserImage(image: posetImage.image, withCaption: captionField.text) { (success, error) in
+        let caption = captionField.text
+        Post.postUserImage(image: posetImage.image, withCaption: caption) { (success, error) in
             if error != nil{
                 print(error?.localizedDescription)
             }
             else{
+                self.captionField.text = "";
+                self.posetImage.image = UIImage(imageLiteralResourceName: "image_placeholder")
                 NotificationCenter.default.post(name: NSNotification.Name("didShared"), object: nil)
+                
             }
         }
         
