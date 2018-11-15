@@ -17,9 +17,17 @@ class HomeFeedViewCell: UITableViewCell {
     
     @IBOutlet weak var captionLabel: UILabel!
     
-    @IBOutlet weak var feedImage: UIImageView!
+   
+    @IBOutlet weak var feedImage: PFImageView!
     
-    
+    var post: Post!{
+        didSet{
+            self.feedImage.file = post["media"] as? PFFile
+            self.feedImage.loadInBackground()
+            self.captionLabel.text = post.caption
+            //cell.captionLabel.text = feed.caption
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         feedImage.layer.cornerRadius = 2 //make feed image corner rounder.

@@ -81,28 +81,33 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="f8g-Nn-W3u" customClass="PFImageView">
-                                                    <rect key="frame" x="0.0" y="-8.5" width="375" height="375"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="375" id="2w7-pL-AhY"/>
+                                                        <constraint firstAttribute="height" constant="375" id="W12-x7-vDR"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPL-AA-moJ">
-                                                    <rect key="frame" x="15" y="374.5" width="345" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="383" width="375" height="45.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="IPL-AA-moJ" secondAttribute="bottom" constant="8" id="2PM-wY-0Wo"/>
-                                                <constraint firstItem="IPL-AA-moJ" firstAttribute="leading" secondItem="kbv-NE-SkU" secondAttribute="leadingMargin" id="3dj-yo-fik"/>
-                                                <constraint firstAttribute="trailing" secondItem="f8g-Nn-W3u" secondAttribute="trailing" id="7Fs-k5-ZL9"/>
-                                                <constraint firstItem="f8g-Nn-W3u" firstAttribute="leading" secondItem="kbv-NE-SkU" secondAttribute="leading" id="CA2-9z-Hiu"/>
-                                                <constraint firstItem="IPL-AA-moJ" firstAttribute="trailing" secondItem="kbv-NE-SkU" secondAttribute="trailingMargin" id="Sa3-Yn-xge"/>
-                                                <constraint firstItem="f8g-Nn-W3u" firstAttribute="top" secondItem="kbv-NE-SkU" secondAttribute="top" constant="-8.5" id="pQv-wZ-LQ3"/>
-                                                <constraint firstItem="IPL-AA-moJ" firstAttribute="top" secondItem="f8g-Nn-W3u" secondAttribute="bottom" constant="8" id="v6M-fw-wyV"/>
+                                                <constraint firstAttribute="bottom" secondItem="IPL-AA-moJ" secondAttribute="bottom" constant="8" id="96s-0V-zDb"/>
+                                                <constraint firstAttribute="trailing" secondItem="f8g-Nn-W3u" secondAttribute="trailing" id="9gn-Sa-gsT"/>
+                                                <constraint firstItem="f8g-Nn-W3u" firstAttribute="leading" secondItem="kbv-NE-SkU" secondAttribute="leading" id="D8l-6q-nmM"/>
+                                                <constraint firstAttribute="trailing" secondItem="IPL-AA-moJ" secondAttribute="trailing" id="NDK-y9-6ef"/>
+                                                <constraint firstItem="IPL-AA-moJ" firstAttribute="leading" secondItem="kbv-NE-SkU" secondAttribute="leading" id="WfP-Ca-v2H"/>
+                                                <constraint firstItem="f8g-Nn-W3u" firstAttribute="top" secondItem="kbv-NE-SkU" secondAttribute="top" id="kIH-37-6Ir"/>
+                                                <constraint firstItem="IPL-AA-moJ" firstAttribute="top" secondItem="f8g-Nn-W3u" secondAttribute="bottom" constant="8" id="uX5-Nl-Zbz"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="captionLabel" destination="IPL-AA-moJ" id="EIN-U8-Zxe"/>
-                                            <outlet property="feedImage" destination="f8g-Nn-W3u" id="u61-4t-Zez"/>
+                                            <outlet property="feedImage" destination="f8g-Nn-W3u" id="wJj-Kx-Ros"/>
+                                            <segue destination="IRG-70-mUC" kind="show" identifier="postDetailSegue" id="fda-R7-Swg"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -137,6 +142,59 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jjl-mp-TwW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1816.8" y="132.68365817091455"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="6BJ-Yd-Rf4">
+            <objects>
+                <viewController id="IRG-70-mUC" customClass="DetailViewController" customModule="Parse_based_Instagram" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="G2M-B2-Cgf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zwY-s4-6W4">
+                                <rect key="frame" x="0.0" y="64" width="375" height="375"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="375" id="Ehe-JV-1IT"/>
+                                    <constraint firstAttribute="width" constant="375" id="H53-oA-I8K"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="date posted" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKc-m5-dql">
+                                <rect key="frame" x="0.0" y="447" width="375" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAi-6q-Quq">
+                                <rect key="frame" x="0.0" y="484" width="375" height="46"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="zwY-s4-6W4" firstAttribute="leading" secondItem="dUw-Lz-Pev" secondAttribute="leading" id="2bI-sF-mzc"/>
+                            <constraint firstItem="fKc-m5-dql" firstAttribute="trailing" secondItem="dUw-Lz-Pev" secondAttribute="trailing" id="5YG-e1-bXa"/>
+                            <constraint firstItem="zwY-s4-6W4" firstAttribute="trailing" secondItem="dUw-Lz-Pev" secondAttribute="trailing" id="8Av-fr-HD0"/>
+                            <constraint firstItem="dUw-Lz-Pev" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="RAi-6q-Quq" secondAttribute="bottom" constant="137" id="C1L-Y5-zSU"/>
+                            <constraint firstItem="RAi-6q-Quq" firstAttribute="top" secondItem="fKc-m5-dql" secondAttribute="bottom" constant="16.5" id="Mdi-iX-Bu2"/>
+                            <constraint firstItem="RAi-6q-Quq" firstAttribute="leading" secondItem="dUw-Lz-Pev" secondAttribute="leading" id="bKO-xm-qY3"/>
+                            <constraint firstItem="fKc-m5-dql" firstAttribute="leading" secondItem="dUw-Lz-Pev" secondAttribute="leading" id="bpL-fi-NRt"/>
+                            <constraint firstItem="fKc-m5-dql" firstAttribute="top" secondItem="zwY-s4-6W4" secondAttribute="bottom" constant="8" id="hYJ-GQ-5Bv"/>
+                            <constraint firstItem="zwY-s4-6W4" firstAttribute="top" secondItem="dUw-Lz-Pev" secondAttribute="top" id="lje-a5-AXN"/>
+                            <constraint firstItem="RAi-6q-Quq" firstAttribute="trailing" secondItem="dUw-Lz-Pev" secondAttribute="trailing" id="m9H-Qh-5pd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dUw-Lz-Pev"/>
+                    </view>
+                    <connections>
+                        <outlet property="captionLabel" destination="RAi-6q-Quq" id="8pw-mg-Ej9"/>
+                        <outlet property="postImage" destination="zwY-s4-6W4" id="UHi-Ga-MOB"/>
+                        <outlet property="timeLabel" destination="fKc-m5-dql" id="BOc-8X-fWg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ELa-aE-w15" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1797.5999999999999" y="826.23688155922048"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="Tnb-Qp-wFB">

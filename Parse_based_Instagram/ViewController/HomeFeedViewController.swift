@@ -25,7 +25,7 @@ class HomeFeedViewController: UIViewController, UITableViewDelegate, UITableView
         tableViewer.delegate = self
         tableViewer.dataSource = self
         tableViewer.rowHeight = UITableView.automaticDimension //autolayout.
-        tableViewer.estimatedRowHeight = 200
+        tableViewer.estimatedRowHeight = 400
         fetch()
         // Do any additional setup after loading the view.
     }
@@ -68,22 +68,11 @@ class HomeFeedViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath) as! HomeFeedViewCell
         let feed = feeds[indexPath.row]
-        
+        cell.post = feed
         
         return cell
     }
     func fetch(){
-        /*let url = URL(string: "https://serene-hamlet-70061.herokuapp.com/parse")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        let task = session.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else if let data = data {
-                
-            }
-        }
-        task.resume()*/
         let querry = Post.query()
         querry?.order(byDescending: "createdAt")
         querry?.limit = 20
@@ -105,6 +94,15 @@ class HomeFeedViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "postDetailSegue"){
+            let cell = sender as! HomeFeedViewCell
+            let indexPath = tableViewer.indexPath(for: cell)!
+            let feed = feeds[indexPath.row]
+            let detailViewControl = segue.destination as! DetailViewController
+            detailViewControl.postDetail = feed
+        }
+    }
     
     /*
     // MARK: - Navigation
